@@ -68,9 +68,11 @@ function Navbar() {
 
 function Hero() {
   const containerRef = useRef(null);
+  const becRef = useRef(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
+      // Text fade in
       gsap.from('.hero-text', {
         y: 40,
         opacity: 0,
@@ -79,22 +81,60 @@ function Hero() {
         ease: 'power3.out',
         delay: 0.2
       });
+
+      // Falling BEC Croissant animation
+      const tl = gsap.timeline();
+      tl.from(becRef.current, {
+        y: -800,
+        rotation: -15,
+        scale: 0.8,
+        duration: 1.5,
+        ease: 'bounce.out',
+        delay: 0.5
+      })
+      // Continuous floating effect
+      .to(becRef.current, {
+        y: "+=20",
+        rotation: 3,
+        duration: 3,
+        repeat: -1,
+        yoyo: true,
+        ease: 'sine.inOut'
+      });
+      
+      // Parallax scroll on the sandwich
+      gsap.to(becRef.current, {
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top top",
+          end: "bottom top",
+          scrub: true
+        },
+        y: -150,
+        ease: 'none'
+      });
+      
     }, containerRef);
     return () => ctx.revert();
   }, []);
 
   return (
-    <section ref={containerRef} className="relative h-[100dvh] w-full flex items-end pb-20 px-6 md:px-20">
-      <div className="absolute inset-0 z-0">
+    <section ref={containerRef} className="relative h-[100dvh] w-full flex items-center md:items-end justify-center md:justify-start pb-20 px-6 md:px-20 bg-dark overflow-hidden">
+      {/* Dark moody background */}
+      <div className="absolute inset-0 z-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-primary/30 via-dark to-dark"></div>
+      
+      {/* Falling Sandwich Image (Screen blend mode to hide black background) */}
+      <div className="absolute inset-0 z-0 flex items-center justify-center pointer-events-none md:ml-64">
         <img 
-          src="https://images.unsplash.com/photo-1484723091791-0fee59cb1028?q=80&w=2000&auto=format&fit=crop" 
-          alt="Artisanal Toast" 
-          className="w-full h-full object-cover"
+          ref={becRef}
+          src="/bec.png" 
+          alt="Bacon Egg and Cheese Placeholder" 
+          className="w-full max-w-[800px] object-contain opacity-90"
+          style={{ mixBlendMode: 'screen', filter: 'drop-shadow(0 20px 30px rgba(0,0,0,0.5))' }}
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-dark/90 via-dark/40 to-dark/10"></div>
       </div>
       
-      <div className="relative z-10 text-background max-w-3xl">
+      <div className="relative z-10 text-background max-w-3xl text-center md:text-left">
         <h1 className="flex flex-col gap-2">
           <span className="hero-text font-sans font-bold text-3xl md:text-5xl tracking-tight uppercase">
             Breakfast is the
@@ -103,12 +143,12 @@ function Hero() {
             Experience.
           </span>
         </h1>
-        <p className="hero-text mt-8 text-lg md:text-xl font-mono text-background/80 max-w-xl">
+        <p className="hero-text mt-8 text-lg md:text-xl font-mono text-background/80 max-w-xl mx-auto md:mx-0">
           Elevated, artisanal toast and handcrafted breakfast experiences. Locally sourced ingredients, precision crafted.
         </p>
         <div className="hero-text mt-10">
           <button className="group relative overflow-hidden bg-accent text-white px-8 py-4 rounded-full font-sans font-bold text-lg transition-transform hover:scale-[1.03]" style={{ transitionTimingFunction: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)' }}>
-            <span className="relative z-10 flex items-center gap-2">Explore the Menu <ArrowRight size={20} /></span>
+            <span className="relative z-10 flex items-center gap-2 justify-center">Explore the Menu <ArrowRight size={20} /></span>
             <span className="absolute inset-0 bg-primary translate-y-[100%] group-hover:translate-y-0 transition-transform duration-300 ease-out z-0"></span>
           </button>
         </div>
