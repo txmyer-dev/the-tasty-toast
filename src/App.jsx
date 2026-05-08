@@ -163,7 +163,7 @@ function ShufflerCard() {
               key={item}
               className="absolute w-full py-4 px-6 rounded-2xl bg-background border border-dark/5 shadow-md flex items-center justify-between transition-all duration-700 ease-in-out"
               style={{
-                transform: \`translateY(\${isTop ? 0 : isMid ? 15 : 30}px) scale(\${isTop ? 1 : isMid ? 0.95 : 0.9})\`,
+                transform: `translateY(${isTop ? 0 : isMid ? 15 : 30}px) scale(${isTop ? 1 : isMid ? 0.95 : 0.9})`,
                 opacity: isTop ? 1 : isMid ? 0.7 : 0.4,
                 zIndex: 3 - index,
                 transitionTimingFunction: 'cubic-bezier(0.34, 1.56, 0.64, 1)'
@@ -263,7 +263,7 @@ function SchedulerCard() {
           {days.map((day, i) => (
             <div 
               key={i} 
-              className={\`aspect-square rounded-xl flex items-center justify-center font-sans font-semibold text-sm transition-colors duration-300 \${activeDay === i ? 'bg-accent text-white' : 'bg-background text-dark/50'}\`}
+              className={`aspect-square rounded-xl flex items-center justify-center font-sans font-semibold text-sm transition-colors duration-300 ${activeDay === i ? 'bg-accent text-white' : 'bg-background text-dark/50'}`}
             >
               {day}
             </div>
@@ -352,7 +352,7 @@ function Protocol() {
           end: "bottom bottom",
           pin: true,
           pinSpacing: false,
-          id: \`card-\${i}\`
+          id: `card-${i}`
         });
         
         gsap.to(card, {
