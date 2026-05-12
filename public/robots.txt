@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://the-tasty-toast-preview.netlify.app/sitemap.xml

@@ -160,9 +160,9 @@ function Hero() {
 
 function Features() {
   const images = [
-    "https://cdn.menu-world.com/the-tasty-toast/photo-1.jpg",
-    "https://cdn.menu-world.com/the-tasty-toast/photo-2.jpg",
-    "https://cdn.menu-world.com/the-tasty-toast/photo-3.jpg"
+    { src: "https://cdn.menu-world.com/the-tasty-toast/photo-1.jpg", alt: "Artisanal toast with seasonal toppings at The Tasty Toast" },
+    { src: "https://cdn.menu-world.com/the-tasty-toast/photo-2.jpg", alt: "Handcrafted breakfast dish at The Tasty Toast Philadelphia" },
+    { src: "https://cdn.menu-world.com/the-tasty-toast/photo-3.jpg", alt: "Sourdough toast with locally sourced ingredients at The Tasty Toast" },
   ];
 
   return (
@@ -170,11 +170,11 @@ function Features() {
       <div className="max-w-7xl mx-auto">
         <h2 className="font-sans font-bold text-4xl md:text-5xl text-primary mb-12 text-center">Featured Menu</h2>
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {images.map((src, idx) => (
+          {images.map(({ src, alt }, idx) => (
             <div key={idx} className="relative aspect-[4/5] rounded-[2rem] overflow-hidden group border border-dark/10 shadow-sm">
-              <img 
-                src={src} 
-                alt={`Menu item ${idx + 1}`} 
+              <img
+                src={src}
+                alt={alt}
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-dark/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
@@ -221,8 +221,8 @@ function Philosophy() {
     <section id="philosophy" ref={containerRef} className="relative py-40 px-6 md:px-20 bg-dark text-background overflow-hidden">
       <div className="absolute inset-0 z-0 opacity-20">
         <img 
-          src="https://images.unsplash.com/photo-1601000537989-13e617d5cba1?q=80&w=2000&auto=format&fit=crop" 
-          alt="Texture" 
+          src="https://images.unsplash.com/photo-1601000537989-13e617d5cba1?q=80&w=2000&auto=format&fit=crop"
+          alt=""
           className="phil-bg w-full h-[120%] object-cover object-center -top-[10%]"
         />
       </div>
